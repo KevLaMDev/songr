@@ -5,6 +5,40 @@
     <title>albums</title>
 </head>
 <body>
-    <div th:text="${albumArrayList}"></div>
+    <h2 th:each="album : ${albumArrayList}">
+        <span th:text="'Title: ' + ${album.title}"></span> <br>
+        <span th:text="'Artist: ' + ${album.artist}"></span> <br>
+        <span th:text="'Song Count: ' + ${album.songCount}"></span> <br>
+        <span th:text="'Length in minutes: ' + ${album.length}"></span> <br>
+        <img th:src="${album.imageUrl}" th:alt="${album.title}"></span>    </h2>
+    <h2 th:each="album : ${dbAlbumArrayList}">
+        <span th:text="'Title: ' + ${album.title}"></span> <br>
+        <span th:text="'Artist: ' + ${album.artist}"></span> <br>
+        <span th:text="'Song Count: ' + ${album.songCount}"></span> <br>
+        <span th:text="'Length in minutes: ' + ${album.length}"></span> <br>
+        <img th:src="${album.imageUrl}" th:alt="${album.title}"></span>
+    </h2>
+    <div>
+        <form action="/add-album" method="post">
+
+                <label>Title
+                    <input type="text" name="title">
+                </label>
+                <label>Artist
+                    <input type="text" name="artist">
+                </label>
+                <label>Image URL
+                    <input type="text" name="imageUrl">
+                </label>
+                <label>Song count
+                    <input type="text" name="songCount">
+                </label>
+                <label>Length in minutes
+                    <input type="text" name="length">
+                </label>
+            <input type="submit">
+
+        </form>
+    </div>
 </body>
 </html>

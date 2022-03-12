@@ -1,5 +1,6 @@
 package kevlamdev.songr;
 
+import kevlamdev.songr.model.Album;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

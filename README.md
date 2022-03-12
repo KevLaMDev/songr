@@ -1,9 +1,8 @@
 # Songr
 
 ## How to run app:
+
+### Running the app from the command line: gradle bootRun
 - run SongrApplication
-- Using localhost:8080 hit each route
-  - Ex: localhost:8080/route
-- To use each route: look into each controller file, you can find the exact route path specified in the GetMapping annotation.
-- The capitalize route takes a path string variable
-  - Ex: localhost:8080/capitalize/hi => expected output: 'HI'
+- Navigate to the albums page via hyperlink from the landing page
+- Scroll down to the bottom of the page. Input new data into the form to add an album to be rendered on the page.
