@@ -1,4 +1,4 @@
-package kevlamdev.songr;
+package kevlamdev.songr.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

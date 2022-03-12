@@ -1,13 +1,21 @@
-package kevlamdev.songr;
+package kevlamdev.songr.controller;
 
+import kevlamdev.songr.Repository.AlbumRepository;
+import kevlamdev.songr.model.Album;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @Controller
 public class albumController {
+    @Autowired
+    AlbumRepository albumRepository;
     @GetMapping("/albums")
     public String getAlbums(Model model)
     {
@@ -20,8 +28,18 @@ public class albumController {
         albumArrayList.add(formattedExcess);
         albumArrayList.add(commando);
         albumArrayList.add(ballads1);
+        ArrayList<Album> dbAlbumArrayList = (ArrayList<Album>)  albumRepository.findAll();
         model.addAttribute("albumArrayList", albumArrayList);
+        model.addAttribute("dbAlbumArrayList", dbAlbumArrayList);
         // return html page
         return "albums.html";
     }
+    @PostMapping("/add-album")
+    public RedirectView addAlbum(Model m, String title, String artist, String imageUrl, int songCount, int length) {
+        Album newAlbum = new Album(title, artist, imageUrl, songCount, length);
+        albumRepository.save(newAlbum);
+
+        return new RedirectView("/albums");
+    }
+
 }
