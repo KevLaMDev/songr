@@ -2,11 +2,45 @@ package kevlamdev.songr;
 
 import kevlamdev.songr.model.Album;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 class SongrApplicationTests {
-
+	@Autowired
+	MockMvc mockMvc;
+	@Test
+	void testHelloWorld() throws Exception
+	{
+		mockMvc.perform(get("/hello"))
+				.andDo(print())  // enable for debugging
+				.andExpect(content().string(containsString("hello world")))
+				.andExpect(status().isOk());
+	}
+	@Test
+	void testCreateAlbum() throws Exception
+	{
+		System.out.println("Testing album creation POST");
+		mockMvc.perform(post("/add-album")
+						.contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+						.param("title", "Test Album")
+						.param("artist", "Test Artist")
+						.param("songCount","20")
+						.param("length", "1200")
+						.param("imageUrl", "hello.jpg")
+				)
+				.andDo(print())
+				.andExpect(redirectedUrl("/albums"))
+				.andExpect(status().isFound());
+	}
 	@Test
 	void contextLoads() {
 	}
@@ -30,5 +64,6 @@ class SongrApplicationTests {
 		sut.setLength(1);
 		assert(sut.getTitle().equals("i") && sut.getArtist().equals("i") && sut.getImageUrl().equals("i") && sut.getSongCount() == 1 && sut.getLength() == 1);
 	}
+
 
 }
