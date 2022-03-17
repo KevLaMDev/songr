@@ -3,24 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>albums</title>
+    <link rel="stylesheet" href="css/albums.css">
 </head>
 <body>
-    <h2 th:each="album : ${albumArrayList}">
-        <span th:text="'Title: ' + ${album.title}"></span> <br>
-        <span th:text="'Artist: ' + ${album.artist}"></span> <br>
-        <span th:text="'Song Count: ' + ${album.songCount}"></span> <br>
-        <span th:text="'Length in minutes: ' + ${album.length}"></span> <br>
-        <img th:src="${album.imageUrl}" th:alt="${album.title}"></span>    </h2>
-    <h2 th:each="album : ${dbAlbumArrayList}">
-        <span th:text="'Title: ' + ${album.title}"></span> <br>
-        <span th:text="'Artist: ' + ${album.artist}"></span> <br>
-        <span th:text="'Song Count: ' + ${album.songCount}"></span> <br>
-        <span th:text="'Length in minutes: ' + ${album.length}"></span> <br>
-        <img th:src="${album.imageUrl}" th:alt="${album.title}"></span>
-    </h2>
     <div>
         <form action="/add-album" method="post">
-
                 <label>Title
                     <input type="text" name="title">
                 </label>
@@ -37,8 +24,18 @@
                     <input type="text" name="length">
                 </label>
             <input type="submit">
-
         </form>
     </div>
+    <h2 th:each="album : ${dbAlbumArrayList}">
+        <span th:text="'Title: ' + ${album.title}"></span> <br>
+        <span th:text="'Artist: ' + ${album.artist}"></span> <br>
+        <span th:text="'Song Count: ' + ${album.songCount}"></span> <br>
+        <span th:text="'Length in minutes: ' + ${album.length}"></span> <br>
+        <img th:src="${album.imageUrl}" th:alt="${album.title}"></span>
+        <form action="/specificAlbum" th:method="get">
+            <input type="submit" value="Find out more about the album here">
+            <input type="hidden" th:value="${album.title}" name="title">
+        </form>
+    </h2>
 </body>
 </html>

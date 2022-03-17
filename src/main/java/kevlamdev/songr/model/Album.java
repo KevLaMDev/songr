@@ -1,9 +1,7 @@
 package kevlamdev.songr.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 
 @Entity //add Entity annotation
@@ -17,9 +15,12 @@ public class Album {
     int songCount;
     int length;
 
+    // map this by the Album property of Song Class Objects
+    @OneToMany(mappedBy = "featuredOnAlbum", cascade = CascadeType.ALL)
+    List<Song> songList;
 
     public Album() {
-
+        // default constructor
     }
 
     public Album(String title, String artist, String imageUrl, int songCount, int length) {
@@ -88,5 +89,13 @@ public class Album {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void addSongToSongList(Song song) {
+        songList.add(song);
+    }
+
+    public List<Song> getSongList() {
+        return songList;
     }
 }

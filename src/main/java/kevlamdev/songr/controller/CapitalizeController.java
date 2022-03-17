@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
-public class capitalizeController {
+public class CapitalizeController {
     @GetMapping("/capitalize/{toBeCapitalized}") // assign route to route handler method
     public String toUpperCase(Model model, @PathVariable String toBeCapitalized)
     {
